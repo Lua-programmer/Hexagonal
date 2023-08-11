@@ -6,7 +6,7 @@ data class Customer (
 
     val name: String,
 
-    val address: Address,
+    var address: Address,
 
     val cpf: String,
 
