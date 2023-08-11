@@ -5,6 +5,7 @@ import io.gituhub.luaprogrammer.hexagonal.app.adapters.input.web.controller.requ
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.input.web.controller.response.CustomerResponse
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.FindCustomerByIdInputPort
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.InsertCustomerInputPort
+import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.UpdateCustomerInputPort
 import jakarta.validation.Valid
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
@@ -14,7 +15,8 @@ import org.springframework.web.bind.annotation.*
 class CustomerController(
 
     private val  insertCustomerInputPort: InsertCustomerInputPort,
-    private val findCustomerByIdInputPort: FindCustomerByIdInputPort
+    private val findCustomerByIdInputPort: FindCustomerByIdInputPort,
+    private val updateCustomerInputPort: UpdateCustomerInputPort
 ) {
 
     private lateinit var customerMapper: CustomerMapper
@@ -31,5 +33,14 @@ class CustomerController(
         val customer = findCustomerByIdInputPort.findById(id)
         val response = customerMapper.toCustomerResponse(customer!!)
         return ResponseEntity.ok().body(response)
+    }
+
+    @PostMapping("/{id}")
+    fun update(@PathVariable id: String, @RequestBody customerRequest: CustomerRequest): ResponseEntity<Unit> {
+        findCustomerByIdInputPort.findById(id)
+        val customer = customerMapper.toCustomer(customerRequest)
+        customer.id = id
+        updateCustomerInputPort.update(customer, customerRequest.zipcode)
+        return ResponseEntity.noContent().build()
     }
 }

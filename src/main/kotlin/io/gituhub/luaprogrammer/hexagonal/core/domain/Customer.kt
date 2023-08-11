@@ -2,7 +2,7 @@ package io.gituhub.luaprogrammer.hexagonal.core.domain
 
 data class Customer (
 
-    val id: String,
+    var id: String,
 
     val name: String,
 
