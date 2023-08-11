@@ -11,10 +11,12 @@ import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/v1/customers")
-class CustomerController {
+class CustomerController(
 
-    private lateinit var  insertCustomerInputPort: InsertCustomerInputPort
-    private lateinit var findCustomerByIdInputPort: FindCustomerByIdInputPort
+    private val  insertCustomerInputPort: InsertCustomerInputPort,
+    private val findCustomerByIdInputPort: FindCustomerByIdInputPort
+) {
+
     private lateinit var customerMapper: CustomerMapper
 
     @PostMapping
