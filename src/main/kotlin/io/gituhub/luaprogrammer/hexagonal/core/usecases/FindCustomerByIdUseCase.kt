@@ -7,9 +7,7 @@ class FindCustomerByIdUseCase(
     private val customerOutput: FindCustomerByIdOutputPort
 ) {
 
-    fun find(id: String): Customer {
-        return customerOutput.find(id).orElseThrow {
-            throw RuntimeException("Customer not found")
-        }
+    fun find(id: String): Customer? {
+        return customerOutput.find(id)
     }
 }

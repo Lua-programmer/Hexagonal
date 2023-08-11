@@ -5,6 +5,8 @@ import io.gituhub.luaprogrammer.hexagonal.core.domain.Customer
 import org.mapstruct.Mapper
 
 @Mapper(componentModel = "spring")
-fun interface CustomerEntityMapper {
+interface CustomerEntityMapper {
     fun toEntity(customer: Customer): CustomerEntity
+
+    fun toDomain(customerEntity: CustomerEntity): Customer
 }
