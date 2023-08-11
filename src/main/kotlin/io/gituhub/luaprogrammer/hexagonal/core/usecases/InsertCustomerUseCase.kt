@@ -4,7 +4,7 @@ import io.gituhub.luaprogrammer.hexagonal.core.domain.Customer
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.output.FindAddressByZipCodeOutputPort
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.output.InsertCustomerOutputPort
 
-class InserteCustomerUseCase(
+class InsertCustomerUseCase(
     private val addressOutput: FindAddressByZipCodeOutputPort,
     private val customerOutput: InsertCustomerOutputPort
 ) {

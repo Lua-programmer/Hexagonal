@@ -27,6 +27,7 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.mapstruct:mapstruct:1.5.2.Final")
+    implementation("org.springframework.data:spring-data-mongodb:4.1.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
     testImplementation("org.springframework.boot:spring-boot-starter-test")
