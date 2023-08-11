@@ -9,7 +9,7 @@ data class CustomerEntity (
         @Id
         val name: String,
 
-        val email: String,
+        var address: AddressEntity,
 
-        val address: AddressEntity,
+        val cpf: String,
 )
