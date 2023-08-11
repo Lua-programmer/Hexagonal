@@ -3,6 +3,7 @@ package io.gituhub.luaprogrammer.hexagonal.app.adapters.input.web.controller
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.input.web.controller.mapper.CustomerMapper
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.input.web.controller.request.CustomerRequest
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.input.web.controller.response.CustomerResponse
+import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.DeleteCustomerByIdInputPort
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.FindCustomerByIdInputPort
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.InsertCustomerInputPort
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.UpdateCustomerInputPort
@@ -16,7 +17,8 @@ class CustomerController(
 
     private val  insertCustomerInputPort: InsertCustomerInputPort,
     private val findCustomerByIdInputPort: FindCustomerByIdInputPort,
-    private val updateCustomerInputPort: UpdateCustomerInputPort
+    private val updateCustomerInputPort: UpdateCustomerInputPort,
+    private val deleteCustomerByIdInputPort: DeleteCustomerByIdInputPort
 ) {
 
     private lateinit var customerMapper: CustomerMapper
@@ -41,6 +43,13 @@ class CustomerController(
         val customer = customerMapper.toCustomer(customerRequest)
         customer.id = id
         updateCustomerInputPort.update(customer, customerRequest.zipcode)
+        return ResponseEntity.noContent().build()
+    }
+
+    @DeleteMapping("/{id}")
+    fun delete(@PathVariable id: String): ResponseEntity<Unit> {
+        findCustomerByIdInputPort.findById(id)
+        deleteCustomerByIdInputPort.delete(id)
         return ResponseEntity.noContent().build()
     }
 }
