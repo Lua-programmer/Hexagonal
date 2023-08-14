@@ -8,6 +8,8 @@ import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.FindCustomerByIdInpu
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.InsertCustomerInputPort
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.input.UpdateCustomerInputPort
 import jakarta.validation.Valid
+import org.mapstruct.factory.Mappers
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
@@ -18,10 +20,10 @@ class CustomerController(
     private val  insertCustomerInputPort: InsertCustomerInputPort,
     private val findCustomerByIdInputPort: FindCustomerByIdInputPort,
     private val updateCustomerInputPort: UpdateCustomerInputPort,
-    private val deleteCustomerByIdInputPort: DeleteCustomerByIdInputPort
-) {
+    private val deleteCustomerByIdInputPort: DeleteCustomerByIdInputPort,
+    private val customerMapper: CustomerMapper
 
-    private lateinit var customerMapper: CustomerMapper
+){
 
     @PostMapping
     fun insert(@RequestBody @Valid customerRequest: CustomerRequest): ResponseEntity<Unit> {

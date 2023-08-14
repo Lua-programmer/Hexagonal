@@ -4,7 +4,9 @@ import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.persistence.reposi
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.persistence.repository.mapper.CustomerEntityMapper
 import io.gituhub.luaprogrammer.hexagonal.core.domain.Customer
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.output.UpdateCustomerOutputPort
+import org.springframework.stereotype.Component
 
+@Component
 class UpdateCustomerAdapter(
     private val customerRepository: CustomerRepository,
     private val customerEntityMapper: CustomerEntityMapper

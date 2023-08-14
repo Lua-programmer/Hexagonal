@@ -4,7 +4,6 @@ import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 plugins {
     id("org.springframework.boot") version "3.1.2"
     id("io.spring.dependency-management") version "1.1.2"
-    kotlin("kapt") version "1.9.0"
     kotlin("jvm") version "1.8.22"
     kotlin("plugin.spring") version "1.8.22"
 }
@@ -28,7 +27,7 @@ dependencies {
     implementation("org.springframework.kafka:spring-kafka")
     implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
     implementation("org.mapstruct:mapstruct:1.5.2.Final")
-    kapt("org.mapstruct:mapstruct-processor:1.4.2.Final")
+    annotationProcessor("org.mapstruct:mapstruct-processor:1.5.2.Final")
     implementation("org.springframework.data:spring-data-mongodb:4.1.2")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")

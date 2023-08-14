@@ -4,11 +4,15 @@ import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.client.FindAddress
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.client.mapper.AddressResponseMapper
 import io.gituhub.luaprogrammer.hexagonal.core.domain.Address
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.output.FindAddressByZipCodeOutputPort
+import org.springframework.stereotype.Component
 
+@Component
 class FindAddressByZipCodeAdapter(
     private val addressByZipCodeClient: FindAddressByZipCodeClient,
-    private val addressResponseMapper: AddressResponseMapper
 ): FindAddressByZipCodeOutputPort {
+
+    private lateinit var addressResponseMapper: AddressResponseMapper
+
     override fun find(zipCode: String): Address {
         var addressResponse = addressByZipCodeClient.find(zipCode)
         return addressResponseMapper.toAddress(addressResponse)

@@ -4,10 +4,10 @@ import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.persistence.reposi
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.persistence.repository.mapper.CustomerEntityMapper
 import io.gituhub.luaprogrammer.hexagonal.core.domain.Customer
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.output.FindCustomerByIdOutputPort
-import java.lang.RuntimeException
-import java.util.*
+import org.springframework.stereotype.Component
 
-class FindCustomerByIdOutputAdapter(
+@Component
+class FindCustomerByIdAdapter(
     private val customerRepository: CustomerRepository,
     private val customerEntityMapper: CustomerEntityMapper
 ): FindCustomerByIdOutputPort {
