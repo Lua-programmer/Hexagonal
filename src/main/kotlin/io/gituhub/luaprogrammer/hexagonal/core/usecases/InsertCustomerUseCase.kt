@@ -12,8 +12,8 @@ class InsertCustomerUseCase(
     private val sendCPFforValidationOutputPort: SendCPFforValidationOutputPort
 ): InsertCustomerInputPort {
 
-    override fun insert(customer: Customer, zipCode: String) {
-        var address = addressOutput.find(zipCode)
+    override fun insert(customer: Customer, zipcode: String) {
+        var address = addressOutput.find(zipcode)
         customer.address = address
         customerOutput.insert(customer)
         sendCPFforValidationOutputPort.send(customer.cpf)

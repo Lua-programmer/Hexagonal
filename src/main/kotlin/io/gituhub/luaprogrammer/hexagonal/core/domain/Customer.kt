@@ -2,15 +2,15 @@ package io.gituhub.luaprogrammer.hexagonal.core.domain
 
 data class Customer (
 
-    var id: String,
+    var id: String? = null,
 
     val name: String,
 
-    var address: Address,
+    var address: Address? = null,
 
     val cpf: String,
 
-    val isValidCpf: Boolean
+    val isValidCpf: Boolean? = null
 ) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true

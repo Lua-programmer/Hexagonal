@@ -1,7 +1,7 @@
 package io.gituhub.luaprogrammer.hexagonal.app.adapters.output
 
 import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.persistence.repository.CustomerRepository
-import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.persistence.repository.mapper.CustomerEntityMapper
+import io.gituhub.luaprogrammer.hexagonal.app.adapters.output.persistence.repository.mapper.toDomain
 import io.gituhub.luaprogrammer.hexagonal.core.domain.Customer
 import io.gituhub.luaprogrammer.hexagonal.infra.ports.output.FindCustomerByIdOutputPort
 import org.springframework.stereotype.Component
@@ -9,11 +9,10 @@ import org.springframework.stereotype.Component
 @Component
 class FindCustomerByIdAdapter(
     private val customerRepository: CustomerRepository,
-    private val customerEntityMapper: CustomerEntityMapper
 ): FindCustomerByIdOutputPort {
     override fun find(id: String): Customer? {
-        val customerEntity = customerRepository.findById(id)
-        return customerEntity.map { customerEntityMapper.toDomain(it) }
-            .orElseThrow { RuntimeException("Customer not found") }
+        val customerEntity = customerRepository.findCustomerEntityById(id)
+            ?.toDomain()
+        return customerEntity ?: throw RuntimeException("Customer not found")
     }
 }

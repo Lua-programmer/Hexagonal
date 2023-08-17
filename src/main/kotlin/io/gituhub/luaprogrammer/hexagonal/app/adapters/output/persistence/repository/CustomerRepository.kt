@@ -10,4 +10,5 @@ interface CustomerRepository: MongoRepository<CustomerEntity, String> {
     fun findCustomerEntityById(id: String): CustomerEntity?
 
     fun deleteCustomerEntityById(id: String)
+
 }

@@ -13,7 +13,7 @@ class UpdateCustomerUseCase(
 ): UpdateCustomerInputPort {
 
     override fun update(customer: Customer, zipCode: String): Unit {
-        customerOutput.find(customer.id)
+        customer.id?.let { customerOutput.find(it) }
         val address = addressOutput.find(zipCode)
         customer.address = address
         customerUpdateOutput.update(customer)
